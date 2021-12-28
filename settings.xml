@@ -1,0 +1,71 @@
+<settings>
+  <!--
+  <localRepository>D:\.m2\repository</localRepository>
+  -->
+  <mirrors>
+    <mirror>
+      <!--This sends everything else to /public -->
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>https://nexus.urcicd.sitelb.bpu.pccw.com/repository/maven/</url>
+    </mirror>
+  </mirrors>
+  <profiles>
+    <profile>
+      <id>nexus</id>
+      <!--Enable snapshots for the built in central repo to direct -->
+      <!--all requests to nexus via the mirror -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+     <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <profile>
+        <id>downloadSources</id>
+        <properties>
+           <downloadSources>true</downloadSources>
+           <downloadJavadocs>true</downloadJavadocs>
+        </properties>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <!--make the profile active all the time -->
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+  <proxies>
+     <proxy>
+        <id>http-pccw-proxy</id>
+        <active>true</active>
+        <protocol>http</protocol>
+        <host>proxy.pccw.com</host>
+        <port>8080</port>
+        <!--
+        <nonProxyHosts>127.0.0.1|10.6.193.15|10.252.15.160|nexus-local|nexus.urcicd.sitelb.bpu.pccw.com</nonProxyHosts>
+        -->
+     </proxy>
+     <proxy>
+        <id>https-pccw-proxy</id>
+        <active>true</active>
+        <protocol>https</protocol>
+        <host>proxy.pccw.com</host>
+        <port>8080</port>
+        <!--
+        -->
+        <nonProxyHosts>127.0.0.1|10.6.193.15|10.252.15.160|nexus-local|nexus.urcicd.sitelb.bpu.pccw.com</nonProxyHosts>
+     </proxy>
+  </proxies>
+  <servers>
+  </servers>
+</settings>
